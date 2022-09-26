@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package discount;
+import "github.com/infobloxopen/protoc-gen-gorm@v1.1.2/proto/options/gorm.proto";
+import "google/protobuf/timestamp.proto";
+option go_package = "../discount";
+
+message Discount {
+  option (gorm.opts).ormable = true;
+  string id = 1 [(gorm.field).tag = {primary_key: true}];
+  string title = 2;
+  google.protobuf.Timestamp startDate = 3;
+  google.protobuf.Timestamp endDate = 4;
+  repeated Row row = 5;
+}
+
+message Row {
+  option (gorm.opts).ormable = true;
+  string SKU = 1;
+  int64 value = 2;
+}

@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package discount;
+option go_package = "../discount";
+
+import "google/protobuf/timestamp.proto";
+import "discountModel.proto";
+
+service DiscountService {
+  rpc UpsertDiscount(UpsertDiscountReq) returns (UpsertDiscountRes) {}
+  rpc GetDiscountedProductIDs(GetDiscountedProductIDsReq) returns (GetDiscountedProductIDsRes) {}
+}
+
+message UpsertDiscountReq {
+  string title = 1;
+  google.protobuf.Timestamp startDate = 2;
+  google.protobuf.Timestamp endDate = 3;
+  repeated Row rows = 4;
+}
+
+message UpsertDiscountRes {
+  string uuid = 1;
+}
+
+message GetDiscountedProductIDsReq {
+  string discountId = 1;
+}
+
+message GetDiscountedProductIDsRes {
+  repeated string productIds = 1;
+}
+
+message PageInfo {
+  int32 totalItems = 1;
+  int32 itemPerPage = 2;
+  int32 pageNumber = 3;
+}
+
+message PageSpec {
+  int32 itemPerPage = 1;
+  int32 pageNumber = 2;
+}
+
+message SortCriteriaSpec {
+  string fieldName = 1;
+  bool isAscending = 2;
+}
+
+message FilterProductSpec {
+  string searchText = 1;
+  int64 minimumPrice = 2;
+  int64 maximumPrice = 3;
+}
