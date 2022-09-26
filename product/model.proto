@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package product;
+import "github.com/infobloxopen/protoc-gen-gorm@v1.1.2/proto/options/gorm.proto";
+option go_package = "../product";
+
+message Product {
+  option (gorm.opts).ormable = true;
+  string id = 1 [(gorm.field).tag = {primary_key: true}];
+  string slug = 2;
+  string name = 3;
+  string description = 4;
+  repeated ProductVariant productVariant = 5;
+}
+
+message ProductVariant {
+  option (gorm.opts).ormable = true;
+  string SKU = 1 [(gorm.field).tag = {unique: true}];
+  int64 price = 2;
+}

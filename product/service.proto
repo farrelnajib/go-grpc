@@ -1,0 +1,72 @@
+syntax = "proto3";
+package product;
+option go_package = "../product";
+
+import "model.proto";
+
+service ProductService {
+  rpc List(ListProductReq) returns (ListProductRes) {}
+  rpc GetProductByIDs(GetProductByIDsReq) returns (GetProductByIDsRes) {}
+  rpc UpsertProduct(UpsertProductReq) returns (UpsertProductRes) {}
+  rpc GetProductIDsBySKUs(GetProductIDsBySKUsReq) returns (GetProductIDsBySKUsRes) {}
+}
+
+message PageInfo {
+  int32 totalItems = 1;
+  int32 itemPerPage = 2;
+  int32 pageNumber = 3;
+}
+
+message PageSpec {
+  int32 itemPerPage = 1;
+  int32 pageNumber = 2;
+}
+
+message SortCriteriaSpec {
+  string fieldName = 1;
+  bool isAscending = 2;
+}
+
+message FilterProductSpec {
+  string searchText = 1;
+  int64 minimumPrice = 2;
+  int64 maximumPrice = 3;
+}
+
+message ListProductReq {
+  FilterProductSpec filterProductSpec = 1;
+  repeated SortCriteriaSpec sortCriteriaSpec = 2;
+  PageSpec pageSpec = 3;
+}
+
+message ListProductRes {
+  repeated string productIDs = 1;
+  PageInfo pageInfo = 2;
+}
+
+message GetProductByIDsReq {
+  repeated string productIDs = 1;
+}
+
+message GetProductByIDsRes {
+  repeated Product products = 1;
+}
+
+message UpsertProductReq {
+  string name = 1;
+  string slug = 2;
+  string description = 3;
+  repeated ProductVariant productVariants = 4;
+}
+
+message UpsertProductRes {
+  string uuid = 1;
+}
+
+message GetProductIDsBySKUsReq {
+  repeated string SKUs = 1;
+}
+
+message GetProductIDsBySKUsRes {
+  repeated string IDs = 1;
+}
