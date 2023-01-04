@@ -23,14 +23,16 @@ func dbSetup() (*gorm.DB, error) {
 	dbHost := os.Getenv("PSQL_HOST")
 	dbPort := os.Getenv("PSQL_PORT")
 	envMode := os.Getenv("ENV_MODE")
+	ssl := os.Getenv("SSL_MODE")
 
 	dbUri := fmt.Sprintf(
-		"host=%v user=%v password=%v dbname=%v port=%v sslmode=require TimeZone=Asia/Jakarta",
+		"host=%v user=%v password=%v dbname=%v port=%v sslmode=%v TimeZone=Asia/Jakarta",
 		dbHost,
 		username,
 		password,
 		dbName,
 		dbPort,
+		ssl,
 	)
 
 	enableLogging := envMode != "prod"

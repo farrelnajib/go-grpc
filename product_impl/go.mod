@@ -7,7 +7,6 @@ require (
 	github.com/gofiber/fiber/v2 v2.37.1
 	github.com/google/uuid v1.3.0
 	github.com/joho/godotenv v1.4.0
-	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c
 	google.golang.org/grpc v1.49.0
 	gorm.io/driver/postgres v1.3.10
 	gorm.io/gorm v1.23.10
@@ -43,5 +42,3 @@ require (
 	google.golang.org/genproto v0.0.0-20220118154757-00ab72f36ad5 // indirect
 	google.golang.org/protobuf v1.28.1 // indirect
 )
-
-replace github.com/farrelnajib/go-rpc/product v1.0.0 => ../product
